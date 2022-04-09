@@ -1,0 +1,62 @@
+
+<div class="navbar-background">
+  <img class="img-logo" src="assets/icon/logo.png" alt="">
+</div>
+<div class="navbar-background">
+  <h3>Pokedex</h3>
+</div>
+<ion-content>
+  <!-- <ion-searchbar placeholder="Search Pokemon" (ionChange)="onSearchChange($event)"></ion-searchbar> -->
+
+  
+  
+  <ion-grid *ngIf="pokemon.length == 0">
+    <ion-card *ngFor="let i of [1, 2, 3, 4, 5]">
+      <ion-avatar slot="start">
+        <ion-skeleton-text animated></ion-skeleton-text>
+      </ion-avatar>
+      <ion-label class="ion-text-capitalize">
+        <h2>
+          <ion-skeleton-text animated style="width:50%"></ion-skeleton-text>
+        </h2>
+        <p>
+          <ion-skeleton-text animated style="width:20%"></ion-skeleton-text>
+        </p>
+      </ion-label>
+    </ion-card>
+  </ion-grid>
+
+  <ion-grid>
+    <ion-row>
+      <ion-col *ngFor="let poke of pokemon" [routerLink]="poke.pokeIndex" size="6">
+        <ion-card>
+          <ion-card-content>
+            
+               
+                  <ion-card-title class="ion-text-capitalize">{{ poke.name }}</ion-card-title>
+              
+                  <ion-card-subtitle>Nº0{{ poke.pokeIndex }}</ion-card-subtitle> 
+                
+                 
+               
+                
+                <img [src]="poke.image">
+
+            
+            
+            
+            
+            <!-- <ion-chip color="primary" *ngFor="let t of poke.types">
+              <ion-label>{{ t.type.name }}</ion-label>
+            </ion-chip> -->
+            <!-- style="margin-left: 60%; padding-bottom: 3%;" -->
+          </ion-card-content>
+        </ion-card>
+      </ion-col>
+    </ion-row>
+    <ion-infinite-scroll (ionInfinite)="loadPokemons(true, $event)">
+      <ion-infinite-scroll-content loadingSpinner="bubbles" loadingText="Loading...">
+      </ion-infinite-scroll-content>
+    </ion-infinite-scroll>
+  </ion-grid>
+</ion-content>
